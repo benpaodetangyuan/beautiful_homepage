@@ -16,6 +16,7 @@ def create_app():
     app.config.from_object(DevConfig)
     app.register_blueprint(user_bp)
     app.register_blueprint(page_bp)
+    db.init_app(app)
     cors = CORS(app)
     cors.init_app(app)
     api = Api(app=app)
@@ -27,6 +28,6 @@ def create_app():
 
     @manager.shell
     def make_shell_context():
-        return dict(app=app, db=db, User=User, HomePage=HomePage)
+        return dict(app=app, db=db, User=User, Home=Home)
 
     return app
