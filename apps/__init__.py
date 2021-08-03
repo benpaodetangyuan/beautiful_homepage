@@ -25,9 +25,14 @@ def create_app():
     migrate.init_app(app)
     manager = Manager(app)
     api.add_resource(HomeResourse, '/home', endpoint='home')
+    app.app_context().push()
+
+    db.drop_all()
+    db.create_all()
+    print(Home.__tablename__)
 
     @manager.shell
     def make_shell_context():
-        return dict(app=app, db=db, User=User, Home=Home)
+        return dict(app=app, db=db, Home=Home, User=User)
 
     return app

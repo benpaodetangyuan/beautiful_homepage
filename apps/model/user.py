@@ -5,10 +5,10 @@ from . import db
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(255))
+    username = db.Column(db.String(255), unique=True)
     password_hash = db.Column(db.String(255))
 
-    def __init__(self, username, password='000000'):
+    def __init__(self, username, password):
         self.username = username
         self.password = password
 
