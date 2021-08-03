@@ -1,9 +1,9 @@
 from flask_restful import Resource, fields, marshal
 from flask import Blueprint, jsonify
-from apps.model.home import HomePage
+from apps.model.home import Home
 
 page_bp = Blueprint('page',__name__)
-homepage_field = {
+home_field = {
     'page': {
         'video': fields.String,
         'image': fields.String,
@@ -13,8 +13,8 @@ homepage_field = {
 }
 
 
-class HomePageResourse(Resource):
+class HomeResourse(Resource):
     def get(self):
-        page = HomePage.query.filter_by().all()
-        page = marshal(page, homepage_field)
+        page = Home.query.filter_by().all()
+        page = marshal(page, home_field)
         return jsonify(page)
